@@ -1,185 +1,293 @@
-import { Heart, Calendar, Bell, Shield, ArrowRight } from 'lucide-react';
+import { Heart, Calendar, FileText, Bell, Shield, Smartphone, ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
+import { motion } from 'motion/react';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 
 interface LandingPageProps {
   onGetStarted: () => void;
 }
 
+const features = [
+  {
+    icon: FileText,
+    title: 'Historial Médico',
+    description: 'Mantén todos los registros veterinarios, vacunas e historial médico en un solo lugar.',
+    color: 'from-purple-500 to-pink-500'
+  },
+  {
+    icon: Calendar,
+    title: 'Recordatorios Inteligentes',
+    description: 'Nunca pierdas una cita, vacuna o hora de alimentación con alertas inteligentes.',
+    color: 'from-blue-500 to-cyan-500'
+  },
+  {
+    icon: Bell,
+    title: 'Notificaciones en Tiempo Real',
+    description: 'Recibe actualizaciones instantáneas sobre eventos de salud próximos e hitos importantes.',
+    color: 'from-orange-500 to-red-500'
+  },
+  {
+    icon: Shield,
+    title: 'Seguro y Privado',
+    description: 'Los datos de tu mascota están encriptados y almacenados de forma segura con protección empresarial.',
+    color: 'from-green-500 to-teal-500'
+  }
+];
+
+const benefits = [
+  'Rastrea múltiples mascotas en una cuenta',
+  'Accede a registros desde cualquier dispositivo',
+  'Comparte información de salud con tu veterinario',
+  'Exporta reportes e historial',
+  'Planes de nutrición y alimentación',
+  'Recordatorios de medicamentos'
+];
+
 export function LandingPage({ onGetStarted }: LandingPageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-blue-50 to-purple-50">
-      {/* Hero Section */}
-      <div className="container mx-auto px-4 py-8 md:py-16">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur px-4 py-2 rounded-full shadow-sm mb-6">
-            <Heart className="w-4 h-4 text-rose-500" fill="currentColor" />
-            <span className="text-sm text-gray-700">Tu compañero en el cuidado de mascotas</span>
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl mb-6 text-gray-900">
-            Cuida a tus mascotas como se merecen 🐾
-          </h1>
-          
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Lleva el control de su salud, alimentación y bienestar desde una sola app.
-          </p>
-          
-          <Button 
-            onClick={onGetStarted}
-            size="lg"
-            className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg shadow-emerald-200 px-8 py-6 rounded-full transition-all hover:scale-105"
-          >
-            Comenzar ahora
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-        </div>
-        
-        {/* Preview Image */}
-        <div className="mt-16 max-w-5xl mx-auto">
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white bg-white">
-            <div className="bg-gradient-to-br from-emerald-100 to-blue-100 p-8 md:p-16 min-h-[300px] md:min-h-[400px] flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-lg">
-                  <Heart className="w-12 h-12 text-emerald-500" />
-                </div>
-                <p className="text-gray-600">Vista previa de la aplicación</p>
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/30">
+                <Heart className="w-5 h-5 text-white fill-white" />
               </div>
+              <span className="text-xl bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent">
+                Pet Health Tracker
+              </span>
             </div>
+            <Button
+              onClick={onGetStarted}
+              className="bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 shadow-lg shadow-cyan-500/25"
+            >
+              Iniciar Sesión
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
           </div>
         </div>
-      </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1600')] opacity-5 bg-cover bg-center" />
+        
+        <div className="max-w-7xl mx-auto relative">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 text-cyan-700 rounded-full text-sm mb-6">
+                <Smartphone className="w-4 h-4" />
+                Disponible en todos los dispositivos
+              </div>
+              
+              <h1 className="text-5xl md:text-6xl text-gray-900 mb-6 leading-tight">
+                La Salud de tu Mascota,
+                <span className="bg-gradient-to-r from-cyan-600 to-teal-600 bg-clip-text text-transparent"> Todo en un Solo Lugar</span>
+              </h1>
+              
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                Lleva el control de vacunas, citas, medicamentos y el historial completo de salud de tu mascota con nuestra plataforma intuitiva.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  onClick={onGetStarted}
+                  className="text-lg h-14 px-8 bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 shadow-xl shadow-cyan-500/30"
+                >
+                  Comenzar Gratis
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg h-14 px-8 border-2"
+                >
+                  Ver Demostración
+                </Button>
+              </div>
+
+              <div className="mt-8 flex items-center gap-8 text-sm text-gray-600">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  Sin tarjeta de crédito
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500" />
+                  Gratis para siempre
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-teal-600 rounded-3xl blur-2xl opacity-20" />
+                <ImageWithFallback
+                  src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800"
+                  alt="Mascotas felices"
+                  className="relative rounded-3xl shadow-2xl w-full"
+                />
+                <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-gray-900">Vacunación Completa</p>
+                      <p className="text-sm text-gray-500">Max • Ahora mismo</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
-      <div className="container mx-auto px-4 py-16 md:py-24">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4 text-gray-900">
-            Todo lo que necesitas en un solo lugar
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Gestiona la salud y bienestar de tus mascotas de manera simple y efectiva
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <Card className="p-8 bg-white/80 backdrop-blur border-0 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-            <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-2xl flex items-center justify-center mb-4">
-              <Shield className="w-7 h-7 text-emerald-600" />
-            </div>
-            <h3 className="mb-3 text-gray-900">Registra sus vacunas</h3>
-            <p className="text-gray-600">
-              Mantén un historial completo de todas las vacunas y tratamientos de tus mascotas
-            </p>
-          </Card>
-          
-          <Card className="p-8 bg-white/80 backdrop-blur border-0 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-            <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mb-4">
-              <Bell className="w-7 h-7 text-blue-600" />
-            </div>
-            <h3 className="mb-3 text-gray-900">Recibe recordatorios automáticos</h3>
-            <p className="text-gray-600">
-              Nunca olvides una cita veterinaria o una dosis de medicamento
-            </p>
-          </Card>
-          
-          <Card className="p-8 bg-white/80 backdrop-blur border-0 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
-            <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center mb-4">
-              <Calendar className="w-7 h-7 text-purple-600" />
-            </div>
-            <h3 className="mb-3 text-gray-900">Organiza su nutrición</h3>
-            <p className="text-gray-600">
-              Planifica y registra la alimentación diaria de tus mascotas
-            </p>
-          </Card>
-        </div>
-      </div>
-
-      {/* Testimonials Section */}
-      <div className="bg-white/50 backdrop-blur py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl mb-4 text-gray-900">
-              Lo que dicen nuestros usuarios
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl text-gray-900 mb-4">
+              Todo lo que tu Mascota Necesita
             </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Herramientas completas de seguimiento de salud diseñadas para dueños modernos de mascotas
+            </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              {
-                name: "María González",
-                text: "Desde que uso Pet Health Tracker, nunca más olvidé una vacuna. ¡Es increíble!",
-                pets: "2 perros"
-              },
-              {
-                name: "Carlos Ramírez",
-                text: "La mejor app para organizar el cuidado de mis gatos. Muy intuitiva y completa.",
-                pets: "3 gatos"
-              },
-              {
-                name: "Ana Torres",
-                text: "Los recordatorios automáticos me han salvado muchas veces. Totalmente recomendada.",
-                pets: "1 perro, 1 gato"
-              }
-            ].map((testimonial, index) => (
-              <Card key={index} className="p-6 bg-white border-0 shadow-md">
-                <div className="mb-4">
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Heart key={i} className="w-4 h-4 text-rose-400" fill="currentColor" />
-                    ))}
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="p-6 hover:shadow-xl transition-all duration-300 border-0 shadow-lg h-full">
+                  <div className={`w-14 h-14 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-4 shadow-lg`}>
+                    <feature.icon className="w-7 h-7 text-white" />
                   </div>
-                  <p className="text-gray-700 mb-4">"{testimonial.text}"</p>
-                </div>
-                <div>
-                  <p className="text-gray-900">{testimonial.name}</p>
-                  <p className="text-sm text-gray-500">{testimonial.pets}</p>
-                </div>
-              </Card>
+                  <h3 className="text-xl text-gray-900 mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Final CTA */}
-      <div className="container mx-auto px-4 py-16 md:py-24">
-        <div className="max-w-3xl mx-auto text-center bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl p-8 md:p-12 shadow-2xl">
-          <h2 className="text-3xl md:text-4xl mb-4 text-white">
-            ¿Listo para empezar?
-          </h2>
-          <p className="text-lg text-white/90 mb-8">
-            Únete a miles de dueños que ya cuidan mejor a sus mascotas
-          </p>
-          <Button 
-            onClick={onGetStarted}
-            size="lg"
-            className="bg-white text-emerald-600 hover:bg-gray-50 shadow-lg px-8 py-6 rounded-full transition-all hover:scale-105"
-          >
-            Crear cuenta gratis
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+      {/* Benefits Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <ImageWithFallback
+                src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800"
+                alt="Cuidado de mascotas"
+                className="rounded-3xl shadow-2xl"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl text-gray-900 mb-6">
+                Por qué nos Aman los Dueños de Mascotas
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Únete a miles de dueños de mascotas que confían en nosotros con la salud de sus miembros peludos de la familia.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-4 h-4 text-white" />
+                    </div>
+                    <span className="text-gray-700">{benefit}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button
+                size="lg"
+                onClick={onGetStarted}
+                className="mt-8 text-lg h-14 px-8 bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-600 hover:to-teal-700 shadow-xl shadow-cyan-500/30"
+              >
+                Comenzar a Rastrear Hoy
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </motion.div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-cyan-600 to-teal-600 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=1600')] opacity-10 bg-cover bg-center" />
+        
+        <div className="max-w-4xl mx-auto text-center relative">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-5xl text-white mb-6">
+              ¿Listo para Darle a tu Mascota el Mejor Cuidado?
+            </h2>
+            <p className="text-xl text-cyan-100 mb-8">
+              Comienza a gestionar la salud de tu mascota hoy. Sin tarjeta de crédito requerida.
+            </p>
+            <Button
+              size="lg"
+              onClick={onGetStarted}
+              className="text-lg h-14 px-8 bg-white text-cyan-600 hover:bg-gray-50 shadow-xl"
+            >
+              Comenzar Gratis
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Heart className="w-6 h-6 text-emerald-400" fill="currentColor" />
-              <span className="text-xl">Pet Health Tracker</span>
+      <footer className="bg-gray-900 text-gray-400 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex items-center gap-2 mb-4 md:mb-0">
+              <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-lg flex items-center justify-center">
+                <Heart className="w-4 h-4 text-white fill-white" />
+              </div>
+              <span className="text-white">Pet Health Tracker</span>
             </div>
-            <p className="text-gray-400 mb-6">
-              Cuidando a tus mascotas con amor y tecnología
-            </p>
-            <div className="flex justify-center gap-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Política de Privacidad</a>
-              <span>•</span>
-              <a href="#" className="hover:text-white transition-colors">Términos de Uso</a>
-              <span>•</span>
-              <a href="#" className="hover:text-white transition-colors">Contacto</a>
-            </div>
-            <p className="text-gray-500 text-sm mt-6">
-              © 2025 Pet Health Tracker. Todos los derechos reservados.
+            <p className="text-sm">
+              © 2025 Pet Health Tracker. Hecho con ❤️ para dueños de mascotas en todas partes.
             </p>
           </div>
         </div>
