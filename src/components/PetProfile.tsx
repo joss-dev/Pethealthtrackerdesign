@@ -46,14 +46,14 @@ export function PetProfile({ pet, onBack, onViewRecords }: PetProfileProps) {
   ];
 
   return (
-    <div className="pb-20">
+    <div className="pb-20 lg:pb-0 pt-14 lg:pt-0">
       {/* Header */}
-      <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-4">
+      <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-4 lg:p-6 lg:rounded-t-3xl">
         <Button
           onClick={onBack}
           variant="ghost"
           size="sm"
-          className="text-white hover:bg-white/20 mb-4"
+          className="text-white hover:bg-white/20 mb-4 lg:hidden"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Volver

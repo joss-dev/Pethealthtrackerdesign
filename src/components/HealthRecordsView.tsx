@@ -67,30 +67,30 @@ export function HealthRecordsView({ onBack }: HealthRecordsViewProps) {
   };
 
   return (
-    <div className="pb-20">
+    <div className="pb-20 lg:pb-0 pt-14 lg:pt-0">
       {/* Header */}
-      <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-6 rounded-b-3xl shadow-lg">
+      <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 sm:p-6 lg:p-8 rounded-b-3xl lg:rounded-3xl shadow-lg lg:mb-6">
         <Button
           onClick={onBack}
           variant="ghost"
           size="sm"
-          className="text-white hover:bg-white/20 mb-4"
+          className="text-white hover:bg-white/20 mb-4 lg:hidden"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Volver
         </Button>
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl mb-2">Registros de Salud</h1>
-            <p className="text-blue-100">Historial médico completo</p>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl mb-2">Registros de Salud</h1>
+            <p className="text-blue-100 text-sm sm:text-base">Historial médico completo</p>
           </div>
-          <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
-            <Stethoscope className="w-6 h-6" />
+          <div className="w-12 h-12 lg:w-16 lg:h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
+            <Stethoscope className="w-6 h-6 lg:w-8 lg:h-8" />
           </div>
         </div>
       </div>
 
-      <div className="px-4 pt-6">
+      <div className="px-4 lg:px-0 pt-6 lg:pt-0">
         <Tabs defaultValue="vaccines" className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="vaccines">Vacunas</TabsTrigger>

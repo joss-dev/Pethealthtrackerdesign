@@ -9,6 +9,7 @@ import { NutritionView } from './components/NutritionView';
 import { RemindersView } from './components/RemindersView';
 import { SettingsView } from './components/SettingsView';
 import { BottomNavigation } from './components/BottomNavigation';
+import { Sidebar } from './components/Sidebar';
 
 export default function App() {
   const [appState, setAppState] = useState<'landing' | 'login' | 'app'>('landing');
@@ -92,55 +93,72 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-screen-md mx-auto bg-white min-h-screen relative">
-        {/* Main Content */}
-        {currentView === 'dashboard' && (
-          <Dashboard 
-            pets={mockPets} 
-            onNavigate={handleNavigate}
-          />
-        )}
+      {/* Sidebar for Desktop */}
+      <Sidebar 
+        currentView={currentView}
+        onNavigate={handleNavigate}
+        onLogout={handleLogout}
+      />
 
-        {currentView === 'pets' && (
-          <PetsListView 
-            pets={mockPets}
-            onSelectPet={(petId) => handleNavigate('petProfile', petId)}
-            onBack={handleBack}
-          />
-        )}
+      {/* Main Content Area */}
+      <div className="lg:ml-64 xl:ml-72 min-h-screen">
+        <div className="max-w-screen-xl mx-auto bg-white lg:bg-transparent min-h-screen">
+          {/* Content Container */}
+          <div className="lg:p-6 lg:pt-14">
+            <div className="lg:bg-white lg:rounded-3xl lg:shadow-sm lg:min-h-[calc(100vh-7rem)] lg:p-8">
+              {/* Main Content */}
+              {currentView === 'dashboard' && (
+                <Dashboard 
+                  pets={mockPets} 
+                  onNavigate={handleNavigate}
+                />
+              )}
 
-        {currentView === 'petProfile' && selectedPet && (
-          <PetProfile
-            pet={selectedPet}
-            onBack={handleBack}
-            onViewRecords={() => handleNavigate('health')}
-          />
-        )}
+              {currentView === 'pets' && (
+                <PetsListView 
+                  pets={mockPets}
+                  onSelectPet={(petId) => handleNavigate('petProfile', petId)}
+                  onBack={handleBack}
+                />
+              )}
 
-        {currentView === 'health' && (
-          <HealthRecordsView onBack={handleBack} />
-        )}
+              {currentView === 'petProfile' && selectedPet && (
+                <PetProfile
+                  pet={selectedPet}
+                  onBack={handleBack}
+                  onViewRecords={() => handleNavigate('health')}
+                />
+              )}
 
-        {currentView === 'nutrition' && (
-          <NutritionView onBack={handleBack} />
-        )}
+              {currentView === 'health' && (
+                <HealthRecordsView onBack={handleBack} />
+              )}
 
-        {currentView === 'reminders' && (
-          <RemindersView onBack={handleBack} />
-        )}
+              {currentView === 'nutrition' && (
+                <NutritionView onBack={handleBack} />
+              )}
 
-        {currentView === 'settings' && (
-          <SettingsView 
-            onBack={handleBack}
-            onLogout={handleLogout}
-          />
-        )}
+              {currentView === 'reminders' && (
+                <RemindersView onBack={handleBack} />
+              )}
 
-        {/* Bottom Navigation */}
-        <BottomNavigation 
-          currentView={currentView}
-          onNavigate={handleNavigate}
-        />
+              {currentView === 'settings' && (
+                <SettingsView 
+                  onBack={handleBack}
+                  onLogout={handleLogout}
+                />
+              )}
+            </div>
+          </div>
+
+          {/* Bottom Navigation - Mobile Only */}
+          <div className="lg:hidden">
+            <BottomNavigation 
+              currentView={currentView}
+              onNavigate={handleNavigate}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

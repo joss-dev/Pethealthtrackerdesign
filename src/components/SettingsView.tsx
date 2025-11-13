@@ -11,30 +11,32 @@ interface SettingsViewProps {
 
 export function SettingsView({ onBack, onLogout }: SettingsViewProps) {
   return (
-    <div className="pb-20">
+    <div className="pb-20 lg:pb-0 pt-14 lg:pt-0">
       {/* Header */}
-      <div className="bg-gradient-to-br from-gray-700 to-gray-900 text-white p-6 rounded-b-3xl shadow-lg">
+      <div className="bg-gradient-to-br from-gray-700 to-gray-900 text-white p-4 sm:p-6 lg:p-8 rounded-b-3xl lg:rounded-3xl shadow-lg lg:mb-6">
         <Button
           onClick={onBack}
           variant="ghost"
           size="sm"
-          className="text-white hover:bg-white/20 mb-4"
+          className="text-white hover:bg-white/20 mb-4 lg:hidden"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Volver
         </Button>
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl mb-2">Configuración</h1>
-            <p className="text-gray-300">Gestiona tu cuenta y preferencias</p>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl mb-2">Configuración</h1>
+            <p className="text-gray-300 text-sm sm:text-base">Gestiona tu cuenta y preferencias</p>
           </div>
-          <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
-            <User className="w-6 h-6" />
+          <div className="w-12 h-12 lg:w-16 lg:h-16 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
+            <User className="w-6 h-6 lg:w-8 lg:h-8" />
           </div>
         </div>
       </div>
 
-      <div className="px-4 pt-6 space-y-6">
+      {/* Desktop: 2 column layout */}
+      <div className="lg:grid lg:grid-cols-2 lg:gap-6">
+        <div className="px-4 lg:px-0 pt-6 lg:pt-0 space-y-6">
         {/* User Profile */}
         <Card className="p-6 bg-white border-0 shadow-md">
           <div className="flex items-center gap-4 mb-4">
@@ -112,69 +114,74 @@ export function SettingsView({ onBack, onLogout }: SettingsViewProps) {
           </Card>
         </div>
 
-        {/* Preferences */}
-        <div>
-          <h2 className="text-lg text-gray-900 mb-3 px-2">Preferencias</h2>
-          <Card className="bg-white border-0 shadow-md divide-y divide-gray-100">
-            <div className="p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center">
-                  <Moon className="w-5 h-5 text-indigo-600" />
-                </div>
-                <div>
-                  <p className="text-gray-900">Modo oscuro</p>
-                  <p className="text-sm text-gray-500">Tema de la aplicación</p>
-                </div>
-              </div>
-              <Switch />
-            </div>
-          </Card>
         </div>
 
-        {/* Help & Support */}
-        <div>
-          <h2 className="text-lg text-gray-900 mb-3 px-2">Ayuda y soporte</h2>
-          <Card className="bg-white border-0 shadow-md divide-y divide-gray-100">
-            <button className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 transition-colors active:bg-gray-100">
-              <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                <HelpCircle className="w-5 h-5 text-blue-600" />
+        {/* Right Column */}
+        <div className="px-4 lg:px-0 pt-6 lg:pt-0 space-y-6">
+          {/* Preferences */}
+          <div>
+            <h2 className="text-lg lg:text-xl text-gray-900 mb-3 px-2 lg:px-0">Preferencias</h2>
+            <Card className="bg-white border-0 shadow-md hover:shadow-lg transition-all divide-y divide-gray-100">
+              <div className="p-4 lg:p-5 flex items-center justify-between">
+                <div className="flex items-center gap-3 lg:gap-4">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                    <Moon className="w-5 h-5 lg:w-6 lg:h-6 text-indigo-600" />
+                  </div>
+                  <div>
+                    <p className="text-gray-900 lg:text-lg">Modo oscuro</p>
+                    <p className="text-sm lg:text-base text-gray-500">Tema de la aplicación</p>
+                  </div>
+                </div>
+                <Switch />
               </div>
-              <div className="flex-1 text-left">
-                <p className="text-gray-900">Centro de ayuda</p>
-                <p className="text-sm text-gray-500">Preguntas frecuentes</p>
-              </div>
-            </button>
+            </Card>
+          </div>
 
-            <button className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 transition-colors active:bg-gray-100">
-              <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center">
-                <Info className="w-5 h-5 text-purple-600" />
-              </div>
-              <div className="flex-1 text-left">
-                <p className="text-gray-900">Acerca de</p>
-                <p className="text-sm text-gray-500">Versión 1.0.0</p>
-              </div>
-            </button>
-          </Card>
-        </div>
+          {/* Help & Support */}
+          <div>
+            <h2 className="text-lg lg:text-xl text-gray-900 mb-3 px-2 lg:px-0">Ayuda y soporte</h2>
+            <Card className="bg-white border-0 shadow-md hover:shadow-lg transition-all divide-y divide-gray-100">
+              <button className="w-full p-4 lg:p-5 flex items-center gap-3 lg:gap-4 hover:bg-gray-50 transition-colors active:bg-gray-100">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                  <HelpCircle className="w-5 h-5 lg:w-6 lg:h-6 text-blue-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="text-gray-900 lg:text-lg">Centro de ayuda</p>
+                  <p className="text-sm lg:text-base text-gray-500">Preguntas frecuentes</p>
+                </div>
+              </button>
 
-        {/* Logout Button */}
-        <Button
-          onClick={onLogout}
-          variant="outline"
-          className="w-full rounded-xl border-2 border-red-200 hover:border-red-300 hover:bg-red-50 text-red-600 hover:text-red-700 py-6"
-        >
-          <LogOut className="w-5 h-5 mr-2" />
-          Cerrar sesión
-        </Button>
+              <button className="w-full p-4 lg:p-5 flex items-center gap-3 lg:gap-4 hover:bg-gray-50 transition-colors active:bg-gray-100">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Info className="w-5 h-5 lg:w-6 lg:h-6 text-purple-600" />
+                </div>
+                <div className="flex-1 text-left">
+                  <p className="text-gray-900 lg:text-lg">Acerca de</p>
+                  <p className="text-sm lg:text-base text-gray-500">Versión 1.0.0</p>
+                </div>
+              </button>
+            </Card>
+          </div>
 
-        {/* Footer Info */}
-        <div className="text-center py-4">
-          <p className="text-sm text-gray-500">
-            Pet Health Tracker v1.0.0
-          </p>
-          <p className="text-xs text-gray-400 mt-1">
-            © 2025 Todos los derechos reservados
-          </p>
+          {/* Logout Button */}
+          <Button
+            onClick={onLogout}
+            variant="outline"
+            className="w-full rounded-xl border-2 border-red-200 hover:border-red-300 hover:bg-red-50 text-red-600 hover:text-red-700 py-6"
+          >
+            <LogOut className="w-5 h-5 mr-2" />
+            Cerrar sesión
+          </Button>
+
+          {/* Footer Info */}
+          <div className="text-center py-4">
+            <p className="text-sm text-gray-500">
+              Pet Health Tracker v1.0.0
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              © 2025 Todos los derechos reservados
+            </p>
+          </div>
         </div>
       </div>
     </div>
